@@ -8,7 +8,7 @@ export default function AppMain(){
         title: '',
         author: '',
         body: '',
-        public: ''
+        public: false
     }
 
     const [articles, setArticles] = useState(articleList)
@@ -17,6 +17,7 @@ export default function AppMain(){
 
     function submitArticle(e){
         e.preventDefault()
+        console.log(newArticle)
 
         const newItem = {
             id: Date.now(),
@@ -31,10 +32,14 @@ export default function AppMain(){
     }
 
     function handleFormArticle(e){
+        const value = 
+        e.target.type === "checkbox" ? 
+        e.target.checked : e.target.value
+
         setNewArticle(
             {
                 ...newArticle,
-                [e.target.name]: e.target.value
+                [e.target.name]: value // sarebbe e.target.value senza il checkbox
             }
         )
     }
@@ -42,6 +47,8 @@ export default function AppMain(){
     return(
         <main>
             <div className="container">
+
+                <h3>Add your Article.</h3>
 
                 {/* submit form */}
                 <form className="row g-3 mt-5" onSubmit={submitArticle}>
@@ -55,12 +62,12 @@ export default function AppMain(){
                       <input name="author" value={newArticle.author} onChange={handleFormArticle} type="text" className="form-control" id="inputAuthor" placeholder="write author of article here" />
                     </div>
                     <div className="col-9">
-                      <label htmlFor="inputBody" className="form-label">Address</label>
+                      <label htmlFor="inputBody" className="form-label">Text</label>
                       <input name="body" value={newArticle.body} onChange={handleFormArticle} type="text" className="form-control" id="inputBody" placeholder="Write text of your article here"/>
                     </div>
                     <div className="col-md-3">
                       <label htmlFor="inputState" className="form-label">Public Article</label>
-                      <input name="public" value={newArticle.public} onChange={handleFormArticle} type="text" id="inputState" className="form-control" placeholder="true or false" />
+                      <input name="public" value={newArticle.public} onChange={handleFormArticle} type="checkbox" id="inputState" className="form-check" placeholder="true or false" />
                     </div>
                     <div className="col-12">
                       <button type="submit" className="btn btn-success">Add Article</button>
@@ -74,7 +81,7 @@ export default function AppMain(){
 
                         item.public === true && (
 
-                        <div className="card mt-5" key={item.id}>
+                        <div className="card mt-5 shadow" key={item.id}>
                             <div className="card-body">
                                 <h5 className="card-title">{item.title}</h5>
                                 <h6 className="card-subtitle mb-2 text-body-secondary">{item.author}</h6>

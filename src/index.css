@@ -1,1 +1,19 @@
+header{
+    text-align: center;
+    padding: 3rem;
+    background-color: rgb(4, 151, 4);
+    color: white;
+    position: relative;
+    margin-bottom: 2rem;
 
+    h5{
+        position: absolute;
+        top: 55%;
+        left: 55%;
+        color: rgb(212, 212, 16);
+    }
+}
+
+main{
+    
+}
